@@ -1,0 +1,27 @@
+name: CI Example
+on: [push]
+
+jobs:
+  run_e2e_tests:
+    runs-on: ubuntu-latest
+    name: Run XK6 Browser
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          cache: npm
+          cache-dependency-path: demo/package-lock.json
+
+      - name: Build Application
+        run: npm --prefix ./demo/ ci && npm --prefix ./demo/ run build
+
+      - name: Run XK6 Browser
+        # uses: grafana/xk6-browser-github-action@v1
+        uses: ./
+        with:
+          include: tests/**/*.ci-test.js
+          app_directory: demo/build
+          args: -e BASE_URL=http://localhost:9000 -e DEBUG=false

@@ -1,0 +1,19 @@
+name: 'XK6 Browser'
+description: 'Run XK6 Browser tests'
+inputs:
+  app_directory:
+    description: 'Location of built application'
+    required: false
+  include:
+    description: 'Pattern to match tests'
+    required: true
+    default: tests/**/*.test.js
+  args: 
+    description: 'Pass arguments to xk6 browser'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.app_directory }}
+    - ${{ inputs.include }}
+    - ${{ inputs.args }}
