@@ -1,20 +1,23 @@
-import launcher from "k6/x/browser";
+import { chromium } from "k6/experimental/browser";
 
-export default function () {
-  const browser = launcher.launch("chromium", {
+export default async function () {
+  const browser = chromium.launch({
     debug: __ENV.DEBUG,
-    headless: true
-  });
-  const context = browser.newContext();
-  const page = context.newPage();
-
-  page.goto(__ENV.BASE_URL, {
-    waitUntil: "load",
+    headless: true,
+    // args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
 
-  const link = page.locator("a");
-  console.log(link.innerText());
+  const page = browser.newPage();
 
-  page.close();
-  browser.close();
+  try {
+    await page.goto(__ENV.BASE_URL, {
+      waitUntil: "load",
+    });
+
+    const link = page.locator("a");
+    console.log(link.innerText());
+  } finally {
+    page.close();
+    browser.close();
+  }
 }

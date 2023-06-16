@@ -1,15 +1,15 @@
-FROM golang:1.19 AS deps
+FROM golang:1.19-bullseye as builder
 
-RUN go install go.k6.io/xk6/cmd/xk6@latest
-RUN xk6 build --output xk6-browser --with github.com/grafana/xk6-browser
+RUN go install -trimpath go.k6.io/xk6/cmd/xk6@latest
+RUN xk6 build --output "/tmp/k6" --with github.com/grafana/xk6-browser
 
 # ------------------------------------
 
-FROM golang:1.19 AS runner
+FROM golang:1.19-bullseye
 
 RUN apt update && apt install -y chromium
-COPY --from=deps /go/xk6-browser /go/xk6-browser
 
+COPY --from=builder /tmp/k6 /usr/bin/k6
 COPY server.go /go/server.go
 COPY entrypoint.sh /entrypoint.sh
 

@@ -16,5 +16,5 @@ if [ -d "$INPUT_APP_DIRECTORY" ]; then
 fi
 
 for file in $INPUT_INCLUDE; do
-    /go/xk6-browser run $INPUT_ARGS "$file"
+    k6 run -e K6_BROWSER_ENABLED=true $INPUT_ARGS "$file"
 done
