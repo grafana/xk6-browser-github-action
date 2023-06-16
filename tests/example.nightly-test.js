@@ -3,7 +3,6 @@ import { chromium } from "k6/experimental/browser";
 export default async function () {
   const browser = chromium.launch({
     headless: true,
-    // args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
 
   const page = browser.newPage();

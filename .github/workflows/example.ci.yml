@@ -19,9 +19,9 @@ jobs:
       #   run: npm --prefix ./demo/ ci && npm --prefix ./demo/ run build
 
       - name: Run K6 Browser
-        # uses: grafana/k6-browser-github-action@v1
+        # uses: grafana/xk6-browser-github-action@v1
         uses: ./
         with:
           include: tests/**/*.ci-test.js
           app_directory: demo/build
-          k6_args: -e BASE_URL=http://localhost:9000 -e DEBUG=false
+          args: -e BASE_URL=http://localhost:9000 -e DEBUG=false

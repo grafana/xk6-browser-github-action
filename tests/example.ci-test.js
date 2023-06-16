@@ -4,7 +4,6 @@ export default async function () {
   const browser = chromium.launch({
     debug: __ENV.DEBUG,
     headless: true,
-    // args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
 
   const page = browser.newPage();
