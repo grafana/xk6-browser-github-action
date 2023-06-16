@@ -9,14 +9,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # - name: Install Node
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     cache: npm
-      #     cache-dependency-path: demo/package-lock.json
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          cache: npm
+          cache-dependency-path: demo/package-lock.json
 
-      # - name: Build Application
-      #   run: npm --prefix ./demo/ ci && npm --prefix ./demo/ run build
+      - name: Build Application
+        run: npm --prefix ./demo/ ci && npm --prefix ./demo/ run build
 
       - name: Run K6 Browser
         # uses: grafana/xk6-browser-github-action@v1
