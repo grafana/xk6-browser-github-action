@@ -1,20 +1,22 @@
-import launcher from "k6/x/browser";
+import { chromium } from "k6/experimental/browser";
 
-export default function () {
-  const browser = launcher.launch("chromium", {
-    debug: __ENV.DEBUG,
-    headless: true
-  });
-  const context = browser.newContext();
-  const page = context.newPage();
-
-  page.goto(__ENV.BASE_URL, {
-    waitUntil: "load",
+export default async function () {
+  const browser = chromium.launch({
+    args: ["no-sandbox"],
+    headless: true,
   });
 
-  const link = page.locator("a");
-  console.log(link.innerText());
+  const page = browser.newPage();
 
-  page.close();
-  browser.close();
+  try {
+    await page.goto(__ENV.BASE_URL, {
+      waitUntil: "networkidle",
+    });
+
+    const link = page.locator("a");
+    console.log(link.innerText());
+  } finally {
+    page.close();
+    browser.close();
+  }
 }

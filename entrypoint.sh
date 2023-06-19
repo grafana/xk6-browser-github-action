@@ -1,11 +1,9 @@
 #!/bin/bash
 
-PATH=$PATH:/usr/local/go/bin
-
 shopt -s globstar
 
 if [ -d "$INPUT_APP_DIRECTORY" ]; then
-    cp -r $INPUT_APP_DIRECTORY ./static
+    cp -r $INPUT_APP_DIRECTORY ./dist
 
     if [ -f "/go/server.go" ]; then
         go run /go/server.go &
@@ -16,5 +14,5 @@ if [ -d "$INPUT_APP_DIRECTORY" ]; then
 fi
 
 for file in $INPUT_INCLUDE; do
-    /go/xk6-browser run $INPUT_ARGS "$file"
+    k6 run $INPUT_ARGS "$file"
 done

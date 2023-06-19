@@ -5,14 +5,14 @@ on:
     - cron: "0 2 1 * *"
 
 jobs:
-  run-tests:
+  run-scheduled-tests:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
       - name: E2E tests
-        # uses: grafana/xk6-browser-github-action@v1
+        # uses: grafana/xk6-browser-github-action@v1.1
         uses: ./
         with:
           include: tests/**/*.nightly-test.js

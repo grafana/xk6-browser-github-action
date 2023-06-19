@@ -2,9 +2,9 @@ name: CI Example
 on: [push]
 
 jobs:
-  run_e2e_tests:
+  run-ci-tests:
     runs-on: ubuntu-latest
-    name: Run XK6 Browser
+    name: Run K6 Browser
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -18,10 +18,10 @@ jobs:
       - name: Build Application
         run: npm --prefix ./demo/ ci && npm --prefix ./demo/ run build
 
-      - name: Run XK6 Browser
-        # uses: grafana/xk6-browser-github-action@v1
+      - name: Run K6 Browser
+        # uses: grafana/xk6-browser-github-action@v1.1
         uses: ./
         with:
           include: tests/**/*.ci-test.js
           app_directory: demo/build
-          args: -e BASE_URL=http://localhost:9000 -e DEBUG=false
+          args: -e BASE_URL=http://localhost:9000
