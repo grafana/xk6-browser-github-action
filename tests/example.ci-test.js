@@ -2,7 +2,7 @@ import { chromium } from "k6/experimental/browser";
 
 export default async function () {
   const browser = chromium.launch({
-    debug: __ENV.DEBUG,
+    args: ["no-sandbox"],
     headless: true,
   });
 
@@ -10,7 +10,7 @@ export default async function () {
 
   try {
     await page.goto(__ENV.BASE_URL, {
-      waitUntil: "load",
+      waitUntil: "networkidle",
     });
 
     const link = page.locator("a");
