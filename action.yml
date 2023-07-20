@@ -1,5 +1,8 @@
 name: 'K6 Browser'
 description: 'Run K6 Browser tests'
+branding:
+  icon: 'crosshair'
+  color: 'purple'
 inputs:
   include:
     description: 'Pattern to match tests'
