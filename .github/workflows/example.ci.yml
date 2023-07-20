@@ -19,7 +19,7 @@ jobs:
         run: npm --prefix ./demo/ ci && npm --prefix ./demo/ run build
 
       - name: Start Application
-        run: npm --prefix ./demo/ run serve
+        run: npm --prefix ./demo/ run serve &
 
       - name: Run K6 Browser
         # uses: grafana/xk6-browser-github-action@v2
