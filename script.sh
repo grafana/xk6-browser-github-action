@@ -10,5 +10,5 @@ while getopts "i:p:" flag; do
 done
 
 for file in $INCLUDE; do
-  K6_BROWSER_ENABLED=true ./k6 run -e HEADLESS=true $PARAMS "$file"
+  K6_BROWSER_ENABLED=true K6_BROWSER_HEADLESS=true K6_BROWSER_ARGS='no-sandbox' ./k6 run $PARAMS "$file"
 done
