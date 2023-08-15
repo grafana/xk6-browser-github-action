@@ -1,14 +1,11 @@
-import { chromium } from "k6/experimental/browser";
+import { browser } from "k6/experimental/browser";
 
 export default async function () {
-  const browser = chromium.launch({
-    args: ["no-sandbox"],
-    headless: true,
-  });
-
-  const page = browser.newPage();
+  let page
 
   try {
+    page = browser.newPage();
+
     await page.goto(__ENV.BASE_URL, {
       waitUntil: "networkidle",
     });
@@ -24,6 +21,5 @@ export default async function () {
     console.log(JSON.stringify(dimensions));
   } finally {
     page.close();
-    browser.close();
   }
 }
