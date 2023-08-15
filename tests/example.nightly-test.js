@@ -1,5 +1,21 @@
 import { browser } from "k6/experimental/browser";
 
+export const options = {
+  scenarios: {
+    browser: {
+      executor: 'shared-iterations',
+      options: {
+        browser: {
+            type: 'chromium',
+        },
+      },
+    },
+  },
+  thresholds: {
+    checks: ["rate==1.0"]
+  }
+}
+
 export default async function () {
   let page
 
