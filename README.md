@@ -1,8 +1,6 @@
-> ### ⚠️ This is a proof of concept
+> ### ⚠️ This action has been deprecated
 >
-> As this is a proof of concept, it won't be supported by the k6 team.
-> It may also break in the future as xk6 evolves. USE AT YOUR OWN RISK!
-> Any issues with the tool should be raised [here](https://github.com/grafana/xk6-browser-github-action/issues).
+> A newer version which uses k6 can be found [here](https://github.com/grafana/k6-github-action).
 
 </br>
 </br>
